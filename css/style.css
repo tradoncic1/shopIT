@@ -59,6 +59,7 @@ ul{
 #page{
     overflow: hidden;
 }
+
 .remove-padd{
     padding-left: 0;
     padding-right: 0;
@@ -74,6 +75,7 @@ ul{
     background: #000 none repeat scroll 0 0;
     padding: 12px 0;
 }
+
 .social-grid li a {
     color: #fff;
     display: inline-block;
@@ -105,6 +107,7 @@ ul{
     display: inline;
     position: relative;
 }
+
 /*.navigation .nav1 li a {
     color: #000;
     display: inline-block;

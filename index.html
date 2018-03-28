@@ -10,8 +10,8 @@ License URI: http://www.themevault.net/license/-->
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="icon" href="images/icons/favicon.png"/>
-        <title>vacayhome</title>
+        <link rel="icon" href="images/icons/right-arrow-hover.png"/>
+        <title>shopIT</title>
 
         <!-- Bootstrap core CSS -->
         <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -36,29 +36,8 @@ License URI: http://www.themevault.net/license/-->
     </head>
     <body>
         <div id="page">
-            <!---header top---->
-            <div class="top-header">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <!--                            <a href="#"> </a>
-                                                        <div class="info-block"><i class="fa fa-map"></i>701 Old York Drive Richmond USA.</div>-->
-                        </div>
-                        <div class="col-md-6">
-                            <div class="social-grid">
-                                <ul class="list-unstyled text-right">
-                                    <li><a><i class="fa fa-facebook"></i></a></li>
-                                    <li><a><i class="fa fa-twitter"></i></a></li>
-                                    <li><a><i class="fa fa-linkedin"></i></a></li>
-                                    <li><a><i class="fa fa-instagram"></i></a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
             <!--header--->
-            <header class="header-container">
+            <header class="header-container" style="background-color: #262626">
                 <div class="container">
                     <div class="top-row">
                         <div class="row">
@@ -200,12 +179,12 @@ License URI: http://www.themevault.net/license/-->
         pageNotFound : "error_404"
       });
 
-      /*app.route({
+      app.route({
         view : "home",
         load : "home.html",
         onCreate: function() {  },
         onReady: function() {  }
-      });*/
+      });
 
       $(['home', 'about', 'products', 'gallery', 'news', 'contact']).each(function(index, name){
         app.route({
