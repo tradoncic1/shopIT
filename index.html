@@ -37,18 +37,21 @@ License URI: http://www.themevault.net/license/-->
     <body>
         <div id="page">
             <!--header--->
-            <header class="header-container" style="background-color: #262626">
+            <header class="header-container">
                 <div class="container">
                     <div class="top-row">
                         <div class="row">
                             <div class="col-md-2 col-sm-6 col-xs-6">
                                 <div id="logo">
-                                    <!--<a href="index.html"><img src="images/logo.png" alt="logo"></a>-->
-                                    <a href="index.html"><span>vacay</span>home</a>
+                                    <a href="index.html"><img src="images/shopIT_logo.png" alt="logo" width="100pt"></a>
                                 </div>
                             </div>
                             <div class="col-sm-6 visible-sm">
-                                <div class="text-right"><button type="button" class="book-now-btn">Shop Now</button></div>
+                                <div class="text-right">
+                                  <button type="button" class="book-now-btn">
+                                    <a data-hover="log in" href="#login"><span>Log In</span></a>
+                                  </button>
+                                </div>
                             </div>
                             <div class="col-md-8 col-sm-12 col-xs-12 remove-padd">
                                 <nav class="navbar navbar-default">
@@ -63,19 +66,21 @@ License URI: http://www.themevault.net/license/-->
 
                                     <div class="collapse navigation navbar-collapse navbar-ex1-collapse remove-space">
                                         <ul class="list-unstyled nav1 cl-effect-10">
-                                            <li><a  data-hover="home" class="active" href="#home"><span>Home</span></a></li>
+                                            <li><a  data-hover="home" href="#home"><span>Home</span></a></li>
                                             <li><a data-hover="about"  href="#about"><span>About</span></a></li>
                                             <li><a data-hover="products"  href="#products"><span>Products</span></a></li>
-                                            <li><a data-hover="gallery"  href="#gallery"><span>Gallery</span></a></li>
-                                            <li><a data-hover="news" href="#news"><span>News</span></a></li>
-                                            <li><a data-hover="contact us" href="#contact"><span>Contact Us</span></a></li>
+                                            <li><a data-hover="contact us" href="#contact_us"><span>Contact Us</span></a></li>
                                         </ul>
-
                                     </div>
                                 </nav>
                             </div>
+
                             <div class="col-md-2  col-sm-4 col-xs-12 hidden-sm">
-                                <div class="text-right"><button type="button" class="book-now-btn">Shop Now</button></div>
+                                <div class="text-right">
+                                  <ul class="list-unstyled nav1 cl-effect-10">
+                                    <li><a  data-hover="log in" href="#login"><span>Log In</span></a></li>
+                                  </ul>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -92,7 +97,8 @@ License URI: http://www.themevault.net/license/-->
                   <section id="home" data-load="home.html"></section>
                   <section id="about" data-load="about.html"></section>
                   <section id="products" data-load="products.html"></section>
-                  <section id="gallery" data-load="gallery.html"></section>
+                  <section id="contact_us" data-load="contact_us.html"></section>
+                  <section id="login" data-load="login.html"></section>
                 </main>
               </div>
 
@@ -108,20 +114,20 @@ License URI: http://www.themevault.net/license/-->
                                 <ul class="list-unstyled footer-contact-list">
                                     <li>
                                         <i class="fa fa-map-marker fa-lg"></i>
-                                        <p>701 Old York Drive Richmond USA.</p>
+                                        <p>Zmaja od Revolucije bb</p>
                                     </li>
                                     <li>
                                         <i class="fa fa-phone fa-lg"></i>
-                                        <p><a href="tel:+1-202-555-0100"> +1-202-555-0100</a></p>
+                                        <p><a href="tel:+1-202-555-0100"> +387-063 456 789</a></p>
                                     </li>
                                     <li>
                                         <i class="fa fa-envelope-o fa-lg"></i>
-                                        <p><a href="mailto:demo@info.com"> demo@info.com</a></p>
+                                        <p><a href="mailto:demo@info.com"> random@mail.com</a></p>
                                     </li>
                                 </ul>
                                 <div class="footer-social-icon">
                                     <a href="#"><i class="fa fa-facebook"></i></a>
-                                    <a href="#"><i class="fa fa-instagram"></i></a>
+                                    <a href="https://www.instagram.com/monty.wizard/" target="_blank"><i class="fa fa-instagram"></i></a>
                                 </div>
                                 <div class="input-group" id="subscribe">
                                     <input type="text" class="form-control subscribe-box" value="" name="subscribe" placeholder="EMAIL ID">
@@ -131,19 +137,8 @@ License URI: http://www.themevault.net/license/-->
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-3 col-sm-6 col-xs-12 width-50 width-set-50">
-                            <div class="footer-details">
-                                <h4>explore</h4>
-                                <ul class="list-unstyled footer-links">
-                                    <li class="active"><a>Home</a></li>
-                                    <li><a href="about.html">About</a></li>
-                                    <li><a href="products.html">Products</a></li>
-                                    <li><a href="gallery.html">Gallery</a></li>
-                                    <li> <a href="news.html">News</a></li>
-                                    <li> <a href="contact.html">Contact</a></li>
-                                </ul>
-                            </div>
-                        </div>
+
+
                         <div class="col-md-6 col-sm-12 col-xs-12">
                             <div class="footer-details">
                                 <h4>Now On Instagram</h4>
@@ -179,14 +174,7 @@ License URI: http://www.themevault.net/license/-->
         pageNotFound : "error_404"
       });
 
-      app.route({
-        view : "home",
-        load : "home.html",
-        onCreate: function() {  },
-        onReady: function() {  }
-      });
-
-      $(['home', 'about', 'products', 'gallery', 'news', 'contact']).each(function(index, name){
+      $(['home', 'about', 'products', 'login', 'contact_us']).each(function(index, name){
         app.route({
           view : name,
           load : name+".html",

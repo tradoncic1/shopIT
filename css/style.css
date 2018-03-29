@@ -36,7 +36,6 @@ h1,h2,h3,h4,h5,h6,p{
 html, html a {
     -webkit-font-smoothing: antialiased;
     text-shadow: 1px 1px 1px rgba(0,0,0,0.004);
-
 }
 a, button {
     text-decoration: none;
@@ -701,6 +700,8 @@ footer a{
     font-weight: 500;
     line-height: 30px;
     padding-left: 15px;
+    font-family: 'Lato', sans-serif;
+    background-color: #ff4157;
 }
 
 .about-right li:before{
@@ -708,7 +709,8 @@ footer a{
     position: absolute;
     left: 0;
     top: 0;
-    font-family: 'fontawesome';
+    /*font-family: 'fontawesome';*/
+    font-family: 'Lato', sans-serif;
     color: #ff4157;
     font-weight: 600;
 }
@@ -718,6 +720,9 @@ footer a{
     font-size: 20px;
     line-height: 24px;
     margin-top: 20px;
+}
+.about-right form{
+  background-color: #ff4157;
 }
 /*contact*/
 /*contact*/
