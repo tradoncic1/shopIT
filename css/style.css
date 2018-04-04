@@ -55,6 +55,7 @@ ul{
     margin: 0;
     padding: 0;
 }
+
 #page{
     overflow: hidden;
 }
@@ -117,6 +118,7 @@ ul{
 }*/
 
 /*carousel*/
+
 #myCarousel1 .carousel-caption {
     bottom: auto;
     color: #fff;
@@ -701,7 +703,6 @@ footer a{
     line-height: 30px;
     padding-left: 15px;
     font-family: 'Lato', sans-serif;
-    background-color: #ff4157;
 }
 
 .about-right li:before{
@@ -721,10 +722,11 @@ footer a{
     line-height: 24px;
     margin-top: 20px;
 }
+
 .about-right form{
-  background-color: #ff4157;
+  background-color: white;
 }
-/*contact*/
+
 /*contact*/
 .contact-left-block > h3 , .contact-form > h3{
     color: #000;
@@ -920,4 +922,22 @@ footer a{
 }
 #instafeed > div:nth-last-child(-n+3) {
     margin-top: 15px;
+}
+
+input {
+  background-color: #e6e6e6;
+  padding: 2pt 0pt 2pt 0pt;
+  border-width: 1pt;
+  border-style: solid;
+  border-radius: 1pt;
+  border-color: rgba(0, 0, 0, 0.25);
+}
+
+input[type=submit] {
+  padding:5px 15px;
+  background:#ccc !important;
+  border:0 none;
+  cursor:pointer;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
 }
