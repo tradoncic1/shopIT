@@ -941,3 +941,8 @@ input[type=submit] {
   -webkit-border-radius: 5px;
   border-radius: 5px;
 }
+
+.products-grid img{
+  border-width: 25pt;
+  border-color: #e6e6e6;
+}
