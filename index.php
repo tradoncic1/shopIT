@@ -1,8 +1,98 @@
-<!--Template Name: vacayhome
-File Name: home.html
-Author Name: ThemeVault
-Author URI: http://www.themevault.net/
-License URI: http://www.themevault.net/license/-->
+<?php
+    include './php/dbconfig.php';
+
+    //login
+    if(isset($_POST['login'])){
+      $email = $_POST['email'];
+      $pass = $_POST['password'];
+
+      $query = $pdo->prepare("SELECT COUNT('user_ID') FROM user WHERE email = '$email' AND password = '$pass'");
+
+      $query->execute();
+
+      $count = $query->fetchColumn();
+
+      if($count == 1){
+        //session_start();
+
+        $query = $pdo->prepare("SELECT is_admin FROM user WHERE email = '$email' AND password = '$pass'");
+
+        $query->execute();
+
+        $adm = $query->fetchColumn();
+
+        $_SESSION['email'] = $email;
+        $_SESSION['password'] = $pass;
+        ?>
+        <script type="text/javascript">
+        window.location.href = '#home';
+        </script>
+        <?php
+        /*$message = $email . '   ' . $pass . '   ' . $adm;
+        echo "<script type='text/javascript'>alert('$message');</script>";
+
+        header('location: #home');*/
+
+
+      }
+      else{
+        $message = "Wrong details! Try again.";
+        echo "<script type='text/javascript'>alert('$message');</script>";
+
+        //header('location: #login');
+      }
+    }
+
+    //register
+    if(isset($_POST['signup'])){
+      $email = $_POST['email'];
+      $pass = $_POST['password'];
+      $fname = $_POST['firstname'];
+      $lname = $_POST['lastname'];
+
+      $query = $pdo->prepare("SELECT COUNT('user_ID') FROM user WHERE email = '$email'");
+
+      $query->execute();
+
+      $count = $query->fetchColumn();
+
+      if($count == 1){
+        session_start();
+
+        $message = "Account already exists!";
+        echo "<script type='text/javascript'>alert('$message');</script>";
+
+
+      }
+      else{
+        $query = $pdo->prepare("INSERT INTO user(email, firstname, lastname, password) VALUES(:mail, :fname, :lname, :pass)");
+
+        $query->execute(array('mail' => $email, 'fname' => $fname, 'lname' => $lname, 'pass' => $pass));
+
+        $_SESSION['email'] = $email;
+        $_SESSION['password'] = $pass;
+        session_start();
+        ?>
+        <script type="text/javascript">
+        window.location.href = '#home';
+        </script>
+        <?php
+      }
+    }
+
+    //logout
+    if (isset($_POST['logout'])){
+        session_destroy();
+        session_unset();
+        $_SESSION = array();
+
+        ?>
+        <script type="text/javascript">
+        window.location.href = '#login';
+        </script>
+        <?php
+    }
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -37,14 +127,14 @@ License URI: http://www.themevault.net/license/-->
     </head>
     <body>
         <div id="page">
-            <!--header--->
+            <!--header-->
             <header class="header-container">
                 <div class="container">
                     <div class="top-row">
                         <div class="row">
                             <div class="col-md-2 col-sm-6 col-xs-6">
                                 <div id="logo">
-                                    <a href="index.html"><img src="images/shopIT_logo.png" alt="logo" width="100pt"></a>
+                                    <a href="#home"><img src="images/shopIT_logo.png" alt="logo" width="100pt"></a>
                                 </div>
                             </div>
                             <div class="col-sm-6 visible-sm">
@@ -72,7 +162,10 @@ License URI: http://www.themevault.net/license/-->
                                             <li><a data-hover="about"  href="#about"><span>About</span></a></li>
                                             <li><a data-hover="products"  href="#products"><span>Products</span></a></li>
                                             <li><a data-hover="contact us" href="#contact_us"><span>Contact Us</span></a></li>
-                                            <li><a data-hover="add product" href="#addition"><span>Add product</span></a></li>
+                                            <?php if ($adm) { ?>
+                                                <li><a data-hover="add product" href="#addition"><span>Add product</span></a></li>
+                                            <?php }  ?>
+                                            <!--<li><a data-hover="add product" href="#addition"><span>Add product</span></a></li>-->
                                         </ul>
                                     </div>
                                 </nav>
@@ -81,8 +174,12 @@ License URI: http://www.themevault.net/license/-->
                             <div class="col-md-2  col-sm-4 col-xs-12 hidden-sm">
                                 <div class="text-right">
                                   <ul class="list-unstyled nav1 cl-effect-10">
-                                    <li><a  data-hover="sign up" href="#signup"><span>sign up</span></a></li>
-                                    <li><a  data-hover="log in" href="#login"><span>Log In</span></a></li>
+                                    <?php if (isset($_SESSION['email'])) { ?>
+                                        <li><a data-hover="log out" href="#logout"><span>Log Out</span></a></li>
+                                    <?php } else { ?>
+                                        <li><a  data-hover="log in/sign up" href="#login"><span>Log In/Sign Up</span></a></li>
+                                    <?php } ?>
+                                    <!-- <li><a  data-hover="log in/sign up" href="#login"><span>Log In/Sign Up</span></a></li> -->
                                   </ul>
                                 </div>
                             </div>
@@ -105,7 +202,7 @@ License URI: http://www.themevault.net/license/-->
                   <section id="addition" data-load="addition.php"></section>
                   <section id="login" data-load="login.php"></section>
                   <section id="signup" data-load="signup.php"></section>
-                  <section id="logout" data-load="logout.php"></section>
+                  <section id="logout" data-load="log_out.php"></section>
                 </main>
               </div>
 
@@ -129,11 +226,10 @@ License URI: http://www.themevault.net/license/-->
                                     </li>
                                     <li>
                                         <i class="fa fa-envelope-o fa-lg"></i>
-                                        <p><a href="mailto:demo@info.com"> random@mail.com</a></p>
+                                        <p><a href="mailto:tarik.r65@gmail.com"> tarik.r65@gmail.com</a></p>
                                     </li>
                                 </ul>
                                 <div class="footer-social-icon">
-                                    <a href="#"><i class="fa fa-facebook"></i></a>
                                     <a href="https://www.instagram.com/monty.wizard/" target="_blank"><i class="fa fa-instagram"></i></a>
                                 </div>
                                 <div class="input-group" id="subscribe">
@@ -169,7 +265,7 @@ License URI: http://www.themevault.net/license/-->
         pageNotFound : "error_404"
       });
 
-      $(['home', 'about', 'products', 'login', 'contact_us', 'addition', 'signup', 'logout']).each(function(index, name){
+      $(['home', 'about', 'products', 'login', 'contact_us', 'addition', 'signup', 'log_out']).each(function(index, name){
         app.route({
           view : name,
           load : name+".php",

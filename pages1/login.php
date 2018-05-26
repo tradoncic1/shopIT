@@ -1,3 +1,5 @@
+
+
 <div class="row">
   <div class="col-md-5 about-left">
     <!--<p>Lorem <label>ipsum</label> dol <span>-sitamet</span></p>-->
@@ -5,31 +7,21 @@
     <p>Please<label>Log In</label></p>
   </div>
   <div class="col-md-7 about-right">
-    <!--<h3>Lorem ipsum dolor sit amet, consec</h3>
-    <p>Donec bibendum massa metus, vel aliquet nunc varius eu. Curabitur nec scelerisque dui. Quisque mattis libero et enim ultricies gravida. Nulla ut commodo massa, eget tincidunt ligula. Vivamus eu ante tincidunt, fermentum risus nec, pharetra turpis.
-      Donec rhoncus eros sed felis aliquet tincidunt. In consectetur tempor quam</p>
-    <ul class="list-unstyled list-inline">
-      <li>Sed vitae facilisis nisi, in finibus lacus. Duis vel nulla orci.</li>
-      <li>fringilla, at ultrices felis dignissim. Integer ultricies posuere odio</li>
-      <li>Sed vestibulum mattis laoreet. Donec sollicitudin justo luctus nulla consectetur</li>
-      <li>Nam dolor tellus, dictum sit amet libero eu, semper placerat massa.</li>
-      <li>consectetur tempor quam, aliquam dignissim diam hendrerit nec. Cras sodales at nisl</li>
-    </ul>-->
-    <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit</span>
-    <form id="login-form" action="./trial.php" method="post">
+    <form id="login-form" method="post">
         <input type="email" name="email">
         <p><label>Email:</label></p><br>
         <br>
         <input type="password" name="password" required>
         <p><label>Password:</label></p><br>
         <br>
-        <input type="submit" value="log in">
+        <input type="submit" value="log in" name="login">
       </form>
+      <br><br>
+      <h4>Don't have an account? Click <a href="#signup">here</a></h4>
   </div>
-
-
 </div>
 <div class="clearfix"> </div>
+
 
 <script>
     $("#login-form").validate({
@@ -37,11 +29,11 @@
         firstname: {
           minlength: 2,
           maxlength: 10
-        }
+        },
         lastname: {
           minlength: 2,
           maxlength: 20
-        }
+        },
         password: {
           minlength: 5,
           maxlength: 18

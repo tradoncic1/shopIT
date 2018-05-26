@@ -1,8 +1,7 @@
 <div class="row">
   <div class="col-md-5 about-left">
     <!--<p>Lorem <label>ipsum</label> dol <span>-sitamet</span></p>-->
-    <p>Welcome!</p>
-    <p>Please<label>Log In</label></p>
+
   </div>
   <div class="col-md-7 about-right">
     <!--<h3>Lorem ipsum dolor sit amet, consec</h3>
@@ -16,54 +15,32 @@
       <li>consectetur tempor quam, aliquam dignissim diam hendrerit nec. Cras sodales at nisl</li>
     </ul>-->
     <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit</span>
+    <br>
     <form id="login-form" action="./trial.php" method="post">
-        <input type="email" name="email">
-        <p><label>Email:</label></p><br>
+      <input type="text" name="firstname" class=" col-md-3" required>
+      <br>
+      <br>
+        <p><label>Product Name:</label></p>
         <br>
-        <input type="password" name="password" required>
-        <p><label>Password:</label></p><br>
         <br>
-        <input type="submit" value="log in">
+        <select class="form-control col-md-3" id="select_type">
+          <option>PC</option>
+          <option>Laptop</option>
+          <option>Peripherals</option>
+          <option>Photo/Video</option>
+          <option>Tablets</option>
+          <option>Consoles</option>
+          <option>Software</option>
+        </select>
+        <br>
+        <br>
+        <label for="select_type">Select list:</label>
+        <br>
+        <br>
+        <input type="submit" value="add product">
       </form>
   </div>
 
 
 </div>
 <div class="clearfix"> </div>
-
-<script>
-    $("#login-form").validate({
-      rules: {
-        firstname: {
-          minlength: 2,
-          maxlength: 10
-        }
-        lastname: {
-          minlength: 2,
-          maxlength: 20
-        }
-        password: {
-          minlength: 5,
-          maxlength: 18
-        }
-      },
-      messages: {
-        firstname: {
-          required: "First name required",
-          minlength: "First name too short",
-          maxlength: "First name too long"
-        }
-        lastname: {
-          required: "Last name required",
-          minlength: "Last name too short",
-          maxlength: "Last name too long"
-        }
-      },
-      submitHandler: function(form) {
-        if (confirm('Are you sure?')){
-          console.log(form);
-          form.submit();
-        }
-      }
-    });
-  </script>
