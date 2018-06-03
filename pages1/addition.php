@@ -16,14 +16,14 @@
     </ul>-->
     <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit</span>
     <br>
-    <form id="login-form" action="./trial.php" method="post">
-      <input type="text" name="firstname" class=" col-md-3" required>
-      <br>
-      <br>
+    <form id="add_product" method="post">
+        <input type="text" name="product_name" class=" col-md-3" required>
+        <br><br>
         <p><label>Product Name:</label></p>
         <br>
         <br>
-        <select class="form-control col-md-3" id="select_type">
+        
+        <select class="form-control col-md-3" id="select_type" name="type">
           <option>PC</option>
           <option>Laptop</option>
           <option>Peripherals</option>
@@ -32,12 +32,24 @@
           <option>Consoles</option>
           <option>Software</option>
         </select>
-        <br>
-        <br>
+        <br><br>
         <label for="select_type">Select list:</label>
         <br>
         <br>
-        <input type="submit" value="add product">
+        
+        <br><input type="text" name="price" class=" col-md-3" required>
+        <br><br>
+        <p><label>Price:</label></p>
+        
+        
+        <textarea class="form-control col-md-3" rows="5" id="comment" name="description"></textarea>
+        <p><label>Description</label></p>
+        <br><br>
+        
+        <br>
+        <br>
+        <br>
+        <input type="submit" value="add product" name="addProduct">
       </form>
   </div>
 

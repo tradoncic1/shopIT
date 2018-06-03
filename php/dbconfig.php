@@ -1,10 +1,10 @@
 <?php
   session_start();
 
-  $host = 'localhost';
-  $user = 'root';
+  $host = 'fdb21.awardspace.net';
+  $user = '2736254_shopit';
   $password = 'radnikdoo23';
-  $dbname = 'shopit';
+  $dbname = '2736254_shopit';
 
   #set dsn
   $dsn = 'mysql:host=' . $host . ';dbname=' . $dbname;

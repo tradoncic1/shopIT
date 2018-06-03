@@ -13,12 +13,12 @@
       $count = $query->fetchColumn();
 
       if($count == 1){
-        //session_start();
-
+        session_start();
+        
         $query = $pdo->prepare("SELECT is_admin FROM user WHERE email = '$email' AND password = '$pass'");
-
+        
         $query->execute();
-
+        
         $adm = $query->fetchColumn();
 
         $_SESSION['email'] = $email;
@@ -30,19 +30,19 @@
         <?php
         /*$message = $email . '   ' . $pass . '   ' . $adm;
         echo "<script type='text/javascript'>alert('$message');</script>";
-
+        
         header('location: #home');*/
-
-
+        
+        
       }
       else{
         $message = "Wrong details! Try again.";
         echo "<script type='text/javascript'>alert('$message');</script>";
-
+        
         //header('location: #login');
       }
     }
-
+    
     //register
     if(isset($_POST['signup'])){
       $email = $_POST['email'];
@@ -58,17 +58,17 @@
 
       if($count == 1){
         session_start();
-
+        
         $message = "Account already exists!";
         echo "<script type='text/javascript'>alert('$message');</script>";
-
-
+        
+        
       }
       else{
         $query = $pdo->prepare("INSERT INTO user(email, firstname, lastname, password) VALUES(:mail, :fname, :lname, :pass)");
 
         $query->execute(array('mail' => $email, 'fname' => $fname, 'lname' => $lname, 'pass' => $pass));
-
+        
         $_SESSION['email'] = $email;
         $_SESSION['password'] = $pass;
         session_start();
@@ -79,18 +79,49 @@
         <?php
       }
     }
-
+    
     //logout
     if (isset($_POST['logout'])){
         session_destroy();
         session_unset();
         $_SESSION = array();
-
+        
         ?>
         <script type="text/javascript">
         window.location.href = '#login';
         </script>
         <?php
+    }
+    
+    //add product
+    if(isset($_POST['addProduct'])){
+      $pname = $_POST['product_name'];
+      $price = $_POST['price'];
+      $type = $_POST['type'];
+      $desc = $_POST['description'];
+      //$pic = $_POST['image'];
+      $adm = 1;
+      
+      $query = $pdo->prepare("SELECT COUNT('product_ID') FROM product WHERE product_name = '$pname'");
+
+      $query->execute();
+
+      $count = $query->fetchColumn();
+
+      if($count != 0){        
+        $message = "Product already exists!";
+        echo "<script type='text/javascript'>alert('$message');</script>";
+        
+        
+      }
+      else{
+        $query = $pdo->prepare("INSERT INTO product(product_name, price, type, description) VALUES(:product_name, :price, :type, :description)");
+
+        $query->execute(array('product_name' => $pname, 'price' => $price, 'type' => $type, 'description' => $desc));
+        
+        $message = "Product added succesfully!";
+        echo "<script type='text/javascript'>alert('$message');</script>";
+      }
     }
 ?>
 

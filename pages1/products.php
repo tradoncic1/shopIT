@@ -59,7 +59,7 @@
                 <div class="col-md-3 col-sm-3 col-xs-6 width-50">
                     <div class="service-details text-center">
                         <div class="service-image">
-                            <img alt="image" class="img-responsive" src="images/icons/wifi.png">
+                            <img alt="image" class="img-responsive" src="images/icons/work.png">
                         </div>
                         <h4><a>free diagnostics</a></h4>
                     </div>
@@ -67,7 +67,7 @@
                 <div class="col-md-3 col-sm-3 col-xs-6 width-50">
                     <div class="service-details text-center">
                         <div class="service-image">
-                            <img alt="image" class="img-responsive" src="images/icons/key.png">
+                            <img alt="image" class="img-responsive" src="images/icons/return.png">
                         </div>
                         <h4><a>return policy</a></h4>
                     </div>
@@ -75,7 +75,7 @@
                 <div class="col-md-3 col-sm-3 col-xs-6 mt-25">
                     <div class="service-details text-center">
                         <div class="service-image">
-                            <img alt="image" class="img-responsive" src="images/icons/car.png">
+                            <img alt="image" class="img-responsive" src="images/icons/credit.png">
                         </div>
                         <h4><a>cash and credit payment</a></h4>
                     </div>
