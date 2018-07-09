@@ -1,46 +1,18 @@
 <?php
     include './php/dbconfig.php';
+    include './php/dbclass.php';
 
+    $db = new DB;
+    
+    $pdo;
+    
     //login
     if(isset($_POST['login'])){
       $email = $_POST['email'];
       $pass = $_POST['password'];
 
-      $query = $pdo->prepare("SELECT COUNT('user_ID') FROM user WHERE email = '$email' AND password = '$pass'");
-
-      $query->execute();
-
-      $count = $query->fetchColumn();
-
-      if($count == 1){
-        session_start();
-        
-        $query = $pdo->prepare("SELECT is_admin FROM user WHERE email = '$email' AND password = '$pass'");
-        
-        $query->execute();
-        
-        $adm = $query->fetchColumn();
-
-        $_SESSION['email'] = $email;
-        $_SESSION['password'] = $pass;
-        ?>
-        <script type="text/javascript">
-        window.location.href = '#home';
-        </script>
-        <?php
-        /*$message = $email . '   ' . $pass . '   ' . $adm;
-        echo "<script type='text/javascript'>alert('$message');</script>";
-        
-        header('location: #home');*/
-        
-        
-      }
-      else{
-        $message = "Wrong details! Try again.";
-        echo "<script type='text/javascript'>alert('$message');</script>";
-        
-        //header('location: #login');
-      }
+      $adm = $db->login($email, $pass, $pdo);
+      
     }
     
     //register
@@ -50,34 +22,9 @@
       $fname = $_POST['firstname'];
       $lname = $_POST['lastname'];
 
-      $query = $pdo->prepare("SELECT COUNT('user_ID') FROM user WHERE email = '$email'");
-
-      $query->execute();
-
-      $count = $query->fetchColumn();
-
-      if($count == 1){
-        session_start();
-        
-        $message = "Account already exists!";
-        echo "<script type='text/javascript'>alert('$message');</script>";
-        
-        
-      }
-      else{
-        $query = $pdo->prepare("INSERT INTO user(email, firstname, lastname, password) VALUES(:mail, :fname, :lname, :pass)");
-
-        $query->execute(array('mail' => $email, 'fname' => $fname, 'lname' => $lname, 'pass' => $pass));
-        
-        $_SESSION['email'] = $email;
-        $_SESSION['password'] = $pass;
-        session_start();
-        ?>
-        <script type="text/javascript">
-        window.location.href = '#home';
-        </script>
-        <?php
-      }
+      $db->register($email, $pass, $fname, $lname, $pdo);
+      
+      die();
     }
     
     //logout
@@ -93,35 +40,135 @@
         <?php
     }
     
-    //add product
-    if(isset($_POST['addProduct'])){
-      $pname = $_POST['product_name'];
-      $price = $_POST['price'];
-      $type = $_POST['type'];
-      $desc = $_POST['description'];
-      //$pic = $_POST['image'];
+    //add phone
+    if(isset($_POST['phone'])){
+      $manufacturer = $_POST['manufacturer'];
+      $name = $_POST['name'];
+      $dim= $_POST['dimensions'];
+      $d_type= $_POST['display_type'];
+      $d_res= $_POST['display_res'];
+      $os= $_POST['os'];
+      $storage= $_POST['storage'];
+      $ram= $_POST['ram'];
+      $cam= $_POST['camera'];
+      $price= $_POST['price'];
+
+      $db->phone($manufacturer, $name, $dim, $d_type, $d_res, $os, $storage, $ram, $cam, $price, $pdo);
+      
       $adm = 1;
       
-      $query = $pdo->prepare("SELECT COUNT('product_ID') FROM product WHERE product_name = '$pname'");
+    }
+    
+    //add camera
+    if(isset($_POST['photo'])){
+      $model = $_POST['model_name'];
+      $sensor= $_POST['sensor_format'];
+      $ratio= $_POST['ratio'];
+      $manufacturer= $_POST['manufacturer'];
+      $price= $_POST['price'];
+
+      $db->photo($model, $sensor, $ratio, $manufacturer, $price, $pdo);
+      
+      $adm = 1;
+    }
+    
+    //add desktop
+    if(isset($_POST['desktop'])){
+      $name = $_POST['name'];
+      $gpu= $_POST['gpu'];
+      $cpu= $_POST['cpu'];
+      $os= $_POST['os'];
+      $storage= $_POST['storage'];
+      $ram= $_POST['ram'];
+      $price= $_POST['price'];
+
+      $db->desktop($name, $gpu, $cpu, $os, $storage, $ram, $price, $pdo);
+      
+      $adm = 1;
+    }
+    
+    //add laptop
+    if(isset($_POST['laptop'])){
+      $name = $_POST['name'];
+      $gpu= $_POST['gpu'];
+      $cpu= $_POST['cpu'];
+      $os= $_POST['os'];
+      $storage= $_POST['storage'];
+      $ram= $_POST['ram'];
+      $price= $_POST['price'];
+
+      $db->laptop($name, $gpu, $cpu, $os, $storage, $ram, $price, $pdo);
+      
+      $adm = 1;
+    }
+    
+    //add peripherals
+    if(isset($_POST['peripherals'])){
+      $name = $_POST['name'];
+      $desc= $_POST['description'];
+      $price= $_POST['price'];
+
+      $db->peripherals($name, $desc, $price, $pdo);
+      
+      $adm = 1;
+    }
+    
+    //add tablet
+    if(isset($_POST['tablet'])){
+      $name = $_POST['name'];
+      $dim= $_POST['dimensions'];
+      $d_type= $_POST['display_type'];
+      $d_res= $_POST['display_res'];
+      $os= $_POST['os'];
+      $storage= $_POST['storage'];
+      $ram= $_POST['ram'];
+      $cam= $_POST['camera'];
+      $price= $_POST['price'];
+
+      $db->tablet($name, $dim, $d_type, $d_res, $os, $storage, $ram, $cam, $price, $pdo);
+      
+      $adm = 1;
+    }
+    
+    //add console
+    if(isset($_POST['console'])){
+      $name = $_POST['name'];
+      $cpu = $_POST['cpu'];
+      $gpu = $_POST['gpu'];
+      $storage = $_POST['storage'];
+      $ram= $_POST['ram'];
+      $price= $_POST['price'];
+
+      $db->console($name, $gpu, $cpu, $storage, $ram, $price, $pdo);
+      
+      $adm = 1;
+    }
+    
+    //add software
+    if(isset($_POST['software'])){
+      $name = $_POST['name'];
+      $type = $_POST['type'];
+      $duration = $_POST['duration'];
+      $price= $_POST['price'];
+
+      $db->software($name, $type, $duration, $price, $pdo);
+      
+      $adm = 1;
+    }
+    
+    //delete product
+    if(isset($_POST['delete'])){
+      $id = $_POST['name'];
+      $type = $_POST['type'];
+
+      $query = $pdo->prepare("DELETE FROM " . $type . " WHERE ID = " . $id);
+
+      $message = $id . '   ' . $type;
+      echo "<script type='text/javascript'>alert('$message');</script>";
 
       $query->execute();
-
-      $count = $query->fetchColumn();
-
-      if($count != 0){        
-        $message = "Product already exists!";
-        echo "<script type='text/javascript'>alert('$message');</script>";
         
-        
-      }
-      else{
-        $query = $pdo->prepare("INSERT INTO product(product_name, price, type, description) VALUES(:product_name, :price, :type, :description)");
-
-        $query->execute(array('product_name' => $pname, 'price' => $price, 'type' => $type, 'description' => $desc));
-        
-        $message = "Product added succesfully!";
-        echo "<script type='text/javascript'>alert('$message');</script>";
-      }
+      $adm = 1;
     }
 ?>
 
@@ -148,7 +195,6 @@
         <script src="js/jquery.min.js" type="text/javascript"></script>
         <script src="js/bootstrap.min.js" type="text/javascript"></script>
         <script src="js/lightbox-plus-jquery.min.js" type="text/javascript"></script>
-        <script src="js/instafeed.min.js" type="text/javascript"></script>
         <script src="js/custom.js" type="text/javascript"></script>
 
         <!--spapp-->
@@ -195,18 +241,21 @@
                                             <li><a data-hover="contact us" href="#contact_us"><span>Contact Us</span></a></li>
                                             <?php if ($adm) { ?>
                                                 <li><a data-hover="add product" href="#addition"><span>Add product</span></a></li>
+                                                <li><a data-hover="delete product" data-toggle="modal" data-target="#delete"><span>Delete product</span></a></li>
                                             <?php }  ?>
-                                            <!--<li><a data-hover="add product" href="#addition"><span>Add product</span></a></li>-->
                                         </ul>
                                     </div>
                                 </nav>
                             </div>
-
+                                
                             <div class="col-md-2  col-sm-4 col-xs-12 hidden-sm">
                                 <div class="text-right">
                                   <ul class="list-unstyled nav1 cl-effect-10">
                                     <?php if (isset($_SESSION['email'])) { ?>
-                                        <li><a data-hover="log out" href="#logout"><span>Log Out</span></a></li>
+                                        <li><!--<a data-hover="log out" href="#logout"><span>Log Out</span></a>-->
+                                        <button type="button" class="btn btn-default btn-lg" data-toggle="modal" data-target="#myModal">Log Out</button>
+                                            
+                                        </li>
                                     <?php } else { ?>
                                         <li><a  data-hover="log in/sign up" href="#login"><span>Log In/Sign Up</span></a></li>
                                     <?php } ?>
@@ -218,6 +267,63 @@
                     </div>
                 </div>
             </header>
+            
+            <div class="modal fade" id="myModal" role="dialog">
+                 <div class="modal-dialog">
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                    <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                    <h1>Are you sure?</h1>
+                    </div>
+                    <div class="modal-footer">
+                        <form id="login-form" method="post">
+                            <input type="submit" value="yes" name="logout">
+                        </form>
+                    </div>
+                </div>
+                                                      
+                </div>
+            </div>
+            
+            <div class="modal fade" id="delete" role="dialog">
+                 <div class="modal-dialog">
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                    <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                    <form method="post">
+                    <input type="text" name="name">
+                    <p><label>Product ID:</label></p>
+                    <hr>
+                    <!--<select name="type">
+                        <option value="">Select type:</option>
+                        <option value="phone">Phone</option>
+                        <option value="camera">Camera</option>
+                        <option value="desktop">Desktop</option>
+                        <option value="laptop">Laptop</option>
+                        <option value="peripheral">Peripherals</option>
+                        <option value="console">Console</option>
+                        <option value="tablet">Tablet</option>
+                        <option value="software">Software</option>                                          
+                    </select>-->
+                    <input type="text" name="type">
+                    <p><label>Type:</label></p>
+                    <hr>
+                    <input type="submit" value="delete" name="delete">
+                    </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+                                                      
+                </div>
+            </div>
 
 
             <!--end-->
@@ -231,9 +337,28 @@
                   <section id="products" data-load="products.php"></section>
                   <section id="contact_us" data-load="contact_us.php"></section>
                   <section id="addition" data-load="addition.php"></section>
+                  <!--<section id="update" data-load="update.php"></section>
+                  <section id="remove" data-load="remove.php"></section>-->
                   <section id="login" data-load="login.php"></section>
                   <section id="signup" data-load="signup.php"></section>
-                  <section id="logout" data-load="log_out.php"></section>
+                  
+                  <section id="phones" data-load="phones.php"></section>
+                  <section id="photo" data-load="photo.php"></section>
+                  <section id="desktop" data-load="desktop.php"></section>
+                  <section id="laptop" data-load="laptop.php"></section>
+                  <section id="peripherals" data-load="peripherals.php"></section>
+                  <section id="tablets" data-load="tablets.php"></section>
+                  <section id="consoles" data-load="consoles.php"></section>
+                  <section id="software" data-load="software.php"></section>
+                  
+                  <section id="phones_list" data-load="phones_list.php"></section>
+                  <section id="photos_list" data-load="photos_list.php"></section>
+                  <section id="software_list" data-load="software_list.php"></section>
+                  <section id="consoles_list" data-load="consoles_list.php"></section>
+                  <section id="desktop_list" data-load="desktop_list.php"></section>
+                  <section id="laptop_list" data-load="laptop_list.php"></section>
+                  <section id="tablets_list" data-load="tablets_list.php"></section>
+                  <section id="peripherals_list" data-load="peripherals_list.php"></section>
                 </main>
               </div>
 
@@ -296,7 +421,7 @@
         pageNotFound : "error_404"
       });
 
-      $(['home', 'about', 'products', 'login', 'contact_us', 'addition', 'signup', 'log_out']).each(function(index, name){
+      $(['home', 'about', 'products', 'login', 'contact_us', 'addition', 'signup', 'log_out', 'phones', 'phones_list', 'photo', 'desktop', 'desktop_list', 'laptop', 'laptop_list', 'peripherals', 'peripherals_list', 'tablets', 'tablets_list', 'consoles', 'consoles_list', 'software', 'software_list']).each(function(index, name){
         app.route({
           view : name,
           load : name+".php",

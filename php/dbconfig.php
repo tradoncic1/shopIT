@@ -12,4 +12,10 @@
   $pdo = new PDO($dsn, $user, $password);
   #setting defaults
   $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+  
+  /*{
+    "alg": "HS256",
+    "typ": "JWT"
+  }*/
+  
 ?>
