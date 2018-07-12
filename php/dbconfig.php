@@ -1,10 +1,10 @@
 <?php
   session_start();
 
-  $host = 'fdb21.awardspace.net';
-  $user = '2736254_shopit';
+  $host = 'sql300.epizy.com';
+  $user = 'epiz_22338357';
   $password = 'radnikdoo23';
-  $dbname = '2736254_shopit';
+  $dbname = 'epiz_22338357_shopit';
 
   #set dsn
   $dsn = 'mysql:host=' . $host . ';dbname=' . $dbname;

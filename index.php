@@ -23,8 +23,6 @@
       $lname = $_POST['lastname'];
 
       $db->register($email, $pass, $fname, $lname, $pdo);
-      
-      die();
     }
     
     //logout
@@ -40,7 +38,7 @@
         <?php
     }
     
-    //add phone
+    //add/update phone
     if(isset($_POST['phone'])){
       $manufacturer = $_POST['manufacturer'];
       $name = $_POST['name'];
@@ -58,10 +56,30 @@
       $adm = 1;
       
     }
+
+    if(isset($_POST['update_phone'])){
+      	  $old_name = $_POST['old_name'];
+          $manufacturer = $_POST['manufacturer'];
+          $name = $_POST['name'];
+          $dim= $_POST['dimensions'];
+          $d_type= $_POST['display_type'];
+          $d_res= $_POST['display_res'];
+          $os= $_POST['os'];
+          $storage= $_POST['storage'];
+          $ram= $_POST['ram'];
+          $cam= $_POST['camera'];
+          $price= $_POST['price'];
+
+          $db->update_phone($old_name, $manufacturer, $name, $dim, $d_type, $d_res, $os, $storage, $ram, $cam, $price, $pdo);
+
+          $adm = 1;
+
+        }
     
-    //add camera
+    //add/update camera
     if(isset($_POST['photo'])){
-      $model = $_POST['model_name'];
+      $manufacturer = $_POST['manufacturer'];
+      $model = $_POST['name'];
       $sensor= $_POST['sensor_format'];
       $ratio= $_POST['ratio'];
       $manufacturer= $_POST['manufacturer'];
@@ -71,9 +89,24 @@
       
       $adm = 1;
     }
+
+	if(isset($_POST['update_photo'])){
+      $old_name = $_POST['old_name'];
+      $manufacturer = $_POST['manufacturer'];
+      $model = $_POST['name'];
+      $sensor= $_POST['sensor_format'];
+      $ratio= $_POST['ratio'];
+      $manufacturer= $_POST['manufacturer'];
+      $price= $_POST['price'];
+
+      $db->update_photo($old_name, $model, $sensor, $ratio, $manufacturer, $price, $pdo);
+      
+      $adm = 1;
+    }
     
-    //add desktop
+    //add/update desktop
     if(isset($_POST['desktop'])){
+      $manufacturer = $_POST['manufacturer'];
       $name = $_POST['name'];
       $gpu= $_POST['gpu'];
       $cpu= $_POST['cpu'];
@@ -82,13 +115,30 @@
       $ram= $_POST['ram'];
       $price= $_POST['price'];
 
-      $db->desktop($name, $gpu, $cpu, $os, $storage, $ram, $price, $pdo);
+      $db->desktop($name, $manufacturer, $gpu, $cpu, $os, $storage, $ram, $price, $pdo);
+      
+      $adm = 1;
+    }
+
+    if(isset($_POST['update_desktop'])){
+      $old_name = $_POST['old_name'];
+      $manufacturer = $_POST['manufacturer'];
+      $name = $_POST['name'];
+      $gpu= $_POST['gpu'];
+      $cpu= $_POST['cpu'];
+      $os= $_POST['os'];
+      $storage= $_POST['storage'];
+      $ram= $_POST['ram'];
+      $price= $_POST['price'];
+
+      $db->update_desktop($old_name, $name, $manufacturer, $gpu, $cpu, $os, $storage, $ram, $price, $pdo);
       
       $adm = 1;
     }
     
-    //add laptop
+    //add/update laptop
     if(isset($_POST['laptop'])){
+      $manufacturer = $_POST['manufacturer'];
       $name = $_POST['name'];
       $gpu= $_POST['gpu'];
       $cpu= $_POST['cpu'];
@@ -97,24 +147,72 @@
       $ram= $_POST['ram'];
       $price= $_POST['price'];
 
-      $db->laptop($name, $gpu, $cpu, $os, $storage, $ram, $price, $pdo);
+      $db->laptop($name, $manufacturer, $gpu, $cpu, $os, $storage, $ram, $price, $pdo);
+      
+      $adm = 1;
+    }
+
+    if(isset($_POST['update_laptop'])){
+      $old_name = $_POST['old_name'];
+      $manufacturer = $_POST['manufacturer'];
+      $name = $_POST['name'];
+      $gpu= $_POST['gpu'];
+      $cpu= $_POST['cpu'];
+      $os= $_POST['os'];
+      $storage= $_POST['storage'];
+      $ram= $_POST['ram'];
+      $price= $_POST['price'];
+
+      $db->update_laptop($old_name, $name, $manufacturer, $gpu, $cpu, $os, $storage, $ram, $price, $pdo);
       
       $adm = 1;
     }
     
-    //add peripherals
+    //add/update peripherals
     if(isset($_POST['peripherals'])){
+      $manufacturer = $_POST['manufacturer'];
       $name = $_POST['name'];
       $desc= $_POST['description'];
       $price= $_POST['price'];
 
-      $db->peripherals($name, $desc, $price, $pdo);
+      $db->peripherals($name, $manufacturer, $desc, $price, $pdo);
+      
+      $adm = 1;
+    }
+
+    if(isset($_POST['update_peripherals'])){
+      $old_name = $_POST['old_name'];
+      $manufacturer = $_POST['manufacturer'];
+      $name = $_POST['name'];
+      $desc= $_POST['description'];
+      $price= $_POST['price'];
+
+      $db->update_peripherals($old_name, $name, $manufacturer, $desc, $price, $pdo);
       
       $adm = 1;
     }
     
-    //add tablet
+    //add/update tablet
     if(isset($_POST['tablet'])){
+      $name = $_POST['name'];
+      $manufacturer = $_POST['manufacturer'];
+      $dim= $_POST['dimensions'];
+      $d_type= $_POST['display_type'];
+      $d_res= $_POST['display_res'];
+      $os= $_POST['os'];
+      $storage= $_POST['storage'];
+      $ram= $_POST['ram'];
+      $cam= $_POST['camera'];
+      $price= $_POST['price'];
+
+      $db->tablet($name, $manufacturer, $dim, $d_type, $d_res, $os, $storage, $ram, $cam, $price, $pdo);
+      
+      $adm = 1;
+    }
+
+    if(isset($_POST['update_tablet'])){
+      $old_name = $_POST['old_name'];
+      $manufacturer = $_POST['manufacturer'];
       $name = $_POST['name'];
       $dim= $_POST['dimensions'];
       $d_type= $_POST['display_type'];
@@ -125,33 +223,63 @@
       $cam= $_POST['camera'];
       $price= $_POST['price'];
 
-      $db->tablet($name, $dim, $d_type, $d_res, $os, $storage, $ram, $cam, $price, $pdo);
+      $db->update_tablet($old_name, $manufacturer, $name, $dim, $d_type, $d_res, $os, $storage, $ram, $cam, $price, $pdo);
       
       $adm = 1;
     }
     
-    //add console
+    //add/update console
     if(isset($_POST['console'])){
       $name = $_POST['name'];
+      $manufacturer = $_POST['manufacturer'];
       $cpu = $_POST['cpu'];
       $gpu = $_POST['gpu'];
       $storage = $_POST['storage'];
       $ram= $_POST['ram'];
       $price= $_POST['price'];
 
-      $db->console($name, $gpu, $cpu, $storage, $ram, $price, $pdo);
+      $db->console($name, $manufacturer, $gpu, $cpu, $storage, $ram, $price, $pdo);
+      
+      $adm = 1;
+    }
+
+    if(isset($_POST['update_console'])){
+      $old_name = $_POST['old_name'];
+      $name = $_POST['name'];
+      $manufacturer = $_POST['manufacturer'];
+      $cpu = $_POST['cpu'];
+      $gpu = $_POST['gpu'];
+      $storage = $_POST['storage'];
+      $ram= $_POST['ram'];
+      $price= $_POST['price'];
+
+      $db->update_console($old_name, $name, $manufacturer, $gpu, $cpu, $storage, $ram, $price, $pdo);
       
       $adm = 1;
     }
     
-    //add software
+    //add/update software
     if(isset($_POST['software'])){
       $name = $_POST['name'];
+      $manufacturer = $_POST['manufacturer'];
       $type = $_POST['type'];
       $duration = $_POST['duration'];
       $price= $_POST['price'];
 
-      $db->software($name, $type, $duration, $price, $pdo);
+      $db->software($name, $manufacturer, $type, $duration, $price, $pdo);
+      
+      $adm = 1;
+    }
+
+    if(isset($_POST['update_software'])){
+      $old_name = $_POST['old_name'];
+      $name = $_POST['name'];
+      $manufacturer = $_POST['manufacturer'];
+      $type = $_POST['type'];
+      $duration = $_POST['duration'];
+      $price= $_POST['price'];
+
+      $db->update_software($old_name, $manufacturer, $name, $type, $duration, $price, $pdo);
       
       $adm = 1;
     }
@@ -162,9 +290,6 @@
       $type = $_POST['type'];
 
       $query = $pdo->prepare("DELETE FROM " . $type . " WHERE ID = " . $id);
-
-      $message = $id . '   ' . $type;
-      echo "<script type='text/javascript'>alert('$message');</script>";
 
       $query->execute();
         
@@ -242,6 +367,7 @@
                                             <?php if ($adm) { ?>
                                                 <li><a data-hover="add product" href="#addition"><span>Add product</span></a></li>
                                                 <li><a data-hover="delete product" data-toggle="modal" data-target="#delete"><span>Delete product</span></a></li>
+                                                <li><a data-hover="change product" href="#update"><span>Change product</span></a></li>
                                             <?php }  ?>
                                         </ul>
                                     </div>
@@ -337,10 +463,9 @@
                   <section id="products" data-load="products.php"></section>
                   <section id="contact_us" data-load="contact_us.php"></section>
                   <section id="addition" data-load="addition.php"></section>
-                  <!--<section id="update" data-load="update.php"></section>
-                  <section id="remove" data-load="remove.php"></section>-->
                   <section id="login" data-load="login.php"></section>
                   <section id="signup" data-load="signup.php"></section>
+                  <section id="update" data-load="update.php"></section>
                   
                   <section id="phones" data-load="phones.php"></section>
                   <section id="photo" data-load="photo.php"></section>
@@ -359,6 +484,15 @@
                   <section id="laptop_list" data-load="laptop_list.php"></section>
                   <section id="tablets_list" data-load="tablets_list.php"></section>
                   <section id="peripherals_list" data-load="peripherals_list.php"></section>
+                  
+                  <section id="update_phones" data-load="update_phones.php"></section>
+                  <section id="update_photo" data-load="update_photo.php"></section>
+                  <section id="update_desktop" data-load="update_desktop.php"></section>
+                  <section id="update_laptop" data-load="update_laptop.php"></section>
+                  <section id="update_peripherals" data-load="update_peripherals.php"></section>
+                  <section id="update_tablets" data-load="update_tablets.php"></section>
+                  <section id="update_consoles" data-load="update_consoles.php"></section>
+                  <section id="update_software" data-load="update_software.php"></section>
                 </main>
               </div>
 

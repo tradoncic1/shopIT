@@ -1,7 +1,10 @@
 <div class="container">
-<center><form id="photo-form" method="post">
+<center><form id="update-photo-form" method="post">
+  <input type="text" name="old_name">
+  <p><label>Current camera name:</label></p><br>
+  <br>
   <input type="text" name="name">
-  <p><label>Camera model:</label></p><br>
+  <p><label>Camera name:</label></p><br>
   <br>
   <input type="text" name="manufacturer">
   <p><label>Manufacturer:</label></p><br>
@@ -15,6 +18,6 @@
   <input type="text" name="price" required>
   <p><label>Price:</label></p><br>
   <br>
-  <input type="submit" value="add" name="photo">
+  <input type="submit" value="change" name="update_photo">
 </form></center>
 </div>

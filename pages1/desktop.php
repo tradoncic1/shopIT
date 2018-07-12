@@ -3,6 +3,9 @@
   <input type="text" name="name">
   <p><label>Name:</label></p><br>
   <br>
+  <input type="text" name="manufacturer">
+  <p><label>Manufacturer:</label></p><br>
+  <br>
   <input type="text" name="gpu" required>
   <p><label>GPU:</label></p><br>
   <br>

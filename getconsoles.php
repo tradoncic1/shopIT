@@ -23,7 +23,7 @@
 <?php
 $q = strval($_GET['q']);
 
-$con = mysqli_connect('fdb21.awardspace.net','2736254_shopit','radnikdoo23','2736254_shopit');
+$con = mysqli_connect('sql300.epizy.com','epiz_22338357','radnikdoo23','epiz_22338357_shopit');
 if (!$con) {
     die('Could not connect: ' . mysqli_error($con));
 }

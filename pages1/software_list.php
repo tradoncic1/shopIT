@@ -6,7 +6,7 @@ function showSoftware(str) {
     } else { 
         xmlhttp = new XMLHttpRequest();
         
-        var url = "getdsoftware.php?q=";
+        var url = "getsoftware.php?q=";
         xmlhttp.open("GET",url+str,true);
         xmlhttp.send();
         
@@ -25,7 +25,7 @@ function showSoftware(str) {
 <center><form>
 <select name="software" onchange="showSoftware(this.value)">
   <option value="">Select manufacturer:</option>
-  <option value="Windows">Windows</option>
+  <option value="Microsoft">Microsoft</option>
   <option value="Avast">Avast</option>
   <option value="McAfee">McAfee</option>
   </select>
